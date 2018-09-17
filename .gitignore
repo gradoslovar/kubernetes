@@ -1,0 +1,15 @@
+project.lock.json
+[Bb]in/
+[Oo]bj/
+.DS_Store
+.vscode
+
+# terraform compiled files
+*.tfstate
+*.tfstate.backup
+
+# terraform module directory
+.terraform/
+
+# terraform plan
+*.plan
