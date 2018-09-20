@@ -1,6 +1,10 @@
-# 
+#  Deploy Azure Kubernetes Service
 
-Terraform provides an easy way to define, preview, and deploy cloud infrastructure by using a [covenient templating language](https://www.terraform.io/docs/configuration/syntax.html). One of the main advantages of Terraform is presence of many [providers](https://www.terraform.io/docs/providers/) which is useful because it allows us to interact with various destination API's (Azure, VMware, Alicloud, AWS, … even GitHub and DNS) in consistent manner utilizing Terraform template language.  
+This is a recepie for deploying managed Kubernetes service on Azure, that will serve as test environmet. This is at the same time a blueprint for the production on Azure.
+
+*For the instalation of one-node cluster on your laptop, please consult the [Minikube guide](MINIKUBE.md).*
+
+Here we will use [Terraform](https://www.terraform.io/) by [Hashicorp](https://www.hashicorp.com/) as a tool for scaffolding the cluster. Terraform provides an easy way to define, preview, and deploy cloud infrastructure by using a [covenient templating language](https://www.terraform.io/docs/configuration/syntax.html). One of the main advantages of Terraform is presence of many [providers](https://www.terraform.io/docs/providers/) which is useful because it allows us to interact with various destination API's (Azure, VMware, Alicloud, AWS, … even GitHub and DNS) in consistent manner utilizing Terraform template language.  
 To use Terraform for provisioning Azure Kubernetes Service (AKS), a couple of prerequisites must be met.
  
 ## Installing Terraform  
@@ -83,11 +87,6 @@ Generate the SSH key pair to use when creating cluster. This key pair will be us
 It will be assumed that keys are stored in *$HOME\.ssh\id_rsa.pub*. Enter the path to the key pair in *variables.tf*.
 
 
-## Download the Kubectl
-
-Kubectl is the command line interface for running commands against Kubernetes clusters. Download the [Kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/windows/amd64/kubectl.exe), and make sure the path of kubectl.exe is included in the [PATH Environment Variable](https://msdn.microsoft.com/en-us/library/office/ee537574(v=office.14).aspx). 
-
-
 ## Deploy the cluster
 
 Now everything is set up. First we need to run `terraform init`. The **init** command downloads the required providers defined in configuration, as well as set the storage account as a backend for Terraform state.  
@@ -105,7 +104,13 @@ If everything looks OK, let's apply the plan and create the cluster
 `terraform apply run.plan`
  
  
-## Test the Kubernetes cluster 
+## Test the Kubernetes cluster
+
+### Download and install Kubectl
+
+Kubectl is the command line interface for running commands against Kubernetes clusters. Download the [Kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/windows/amd64/kubectl.exe), and make sure the path of kubectl.exe is included in the [PATH Environment Variable](https://msdn.microsoft.com/en-us/library/office/ee537574(v=office.14).aspx). 
+
+### Test the cluster
 
 First, we need to get the Kubernetes config. It could be done from Terraform state or via Azure CLI. Here we are using Azure CLI:  
 `az aks get-credentials --resource-group <resource_group_name> --name <cluster_name>`  
@@ -123,3 +128,5 @@ Then we run `kubectl proxy` to be able to access the dashboard, and finally, the
 
 
 ## Deploying pods
+
+[Deploying to kubernetes](../deployment/README.md)
