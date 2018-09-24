@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetcoreapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: aspnetcoreapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aspnetcoreapp
+    spec:
+      containers:
+      - name: aspnetcoreapp
+        image: maksh/aspnetcorekuberappimg
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: 1m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnetcoreapp-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: aspnetcoreapp
