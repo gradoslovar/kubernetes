@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testps
+  labels:
+    app: testps
+spec:
+  selector:
+    matchLabels:
+      app: testps
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: testps
+    spec:
+      containers:
+      - name: testps
+        image: microsoft/windowsservercore:ltsc2016
+        ports:
+        - containerPort: 5985
+          name: testps
+      nodeSelector:
+        beta.kubernetes.io/os: windows
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testps
+  labels:
+    app: testps
+spec:
+  ports:
+    - name: "5985"
+      port: 5985
+      targetPort: 5985
+  selector:
+    app: testps
+  clusterIP: None

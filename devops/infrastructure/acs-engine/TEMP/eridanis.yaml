@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eridanis
+  labels:
+    app: eridanis
+spec:
+  selector:
+    matchLabels:
+      app: eridanis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eridanis
+    spec:
+      containers:
+      - name: eridanis
+        image: testv2.azurecr.io/eridanis:v3
+        ports:
+        - containerPort: 3000
+          name: eridanis
+      imagePullSecrets:
+      - name: acr-auth
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eridanis
+  labels:
+    app: eridanis
+spec:
+  ports:
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: eridanis
+  clusterIP: None

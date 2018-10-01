@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: win-webserver
+spec:
+  rules:
+  - host: win.apps.stackmasters.com
+    http:
+      paths:
+      - backend:
+          serviceName: win-webserver
+          servicePort: 80

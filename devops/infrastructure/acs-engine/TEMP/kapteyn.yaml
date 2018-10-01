@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kapteyn
+  labels:
+    app: kapteyn
+spec:
+  selector:
+    matchLabels:
+      app: kapteyn
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kapteyn
+    spec:
+      containers:
+      - name: kapteyn
+        image: testv2.azurecr.io/kapteyn:v2
+        ports:
+        - containerPort: 4000
+          name: kapteyn
+      imagePullSecrets:
+      - name: acr-auth
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kapteyn
+  labels:
+    app: kapteyn
+spec:
+  ports:
+    - port: 4000
+  selector:
+    app: kapteyn
+  type: LoadBalancer

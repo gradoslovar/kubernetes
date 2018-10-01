@@ -13,3 +13,8 @@ project.lock.json
 
 # terraform plan
 *.plan
+
+# acs-engin
+
+_output/
+translations/

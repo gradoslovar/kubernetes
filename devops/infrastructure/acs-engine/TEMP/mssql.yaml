@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cassql
+spec:
+  selector:
+    matchLabels:
+      app: cassql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cassql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: cassql
+        image: testv2.azurecr.io/dbtemplate:v2
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sapassword
+              key: SA_PASSWORD
+      imagePullSecrets:
+      - name: acr-auth
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassql
+spec:
+  selector:
+    app: cassql
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+  type: LoadBalancer
