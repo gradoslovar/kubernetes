@@ -84,7 +84,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         vm_size         = "${var.vm_size}"
         os_type         = "Linux"
         os_disk_size_gb = 30
-        vnet_subnet_id = "${azurerm_subnet.k8s.id}"
+        vnet_subnet_id = "${azurerm_subnet.k8s-subnet.id}"
         # max_pods = 100 # if one wants to set number of pods diffrent from defaults 30
     }
 
