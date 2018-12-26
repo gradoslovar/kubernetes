@@ -14,7 +14,9 @@ project.lock.json
 # terraform plan
 *.plan
 
-# acs-engin
+# terraform vars
+*.tfvars
 
+# acs-engine
 _output/
 translations/
