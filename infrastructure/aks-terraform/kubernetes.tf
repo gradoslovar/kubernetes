@@ -18,7 +18,7 @@ resource "azurerm_log_analytics_workspace" "k8s-log" {
   name                = "watchk8s"
   location            = "${azurerm_resource_group.k8s-rg.location}"
   resource_group_name = "${azurerm_resource_group.k8s-rg.name}"
-  sku                 = "PerGB2018"
+  sku                 = "Free"
 }
 
 # Create Container Insights Solution
@@ -56,7 +56,7 @@ resource "azurerm_subnet" "k8s-subnet" {
 resource "azurerm_subnet" "vm-subnet" {
   name                 = "${var.subnet_name}"
   resource_group_name  = "${azurerm_resource_group.k8s-rg.name}"
-  address_prefix       = "192.168.100.129/26"
+  address_prefix       = "192.168.100.128/26"
   virtual_network_name = "${azurerm_virtual_network.k8s-vnet.name}"
   service_endpoints    = ["Microsoft.Storage", "Microsoft.Sql"]
 }
