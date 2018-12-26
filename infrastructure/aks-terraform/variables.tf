@@ -29,8 +29,12 @@ variable "vnet_name" {
   default = "k8s-vnet"
 }
 
-variable "subnet_name" {
+variable "k8s_subnet_name" {
   default = "k8s-subnet"
+}
+
+variable "vm_subnet_name" {
+  default = "vms-subnet"
 }
 
 variable resource_group_name {

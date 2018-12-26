@@ -43,18 +43,18 @@ resource "azurerm_virtual_network" "k8s-vnet" {
   address_space = ["192.168.100.0/24"]
 }
 
-# Create vnet subnet for kubernetes
+# Create vnet subnet for Kubernetes
 resource "azurerm_subnet" "k8s-subnet" {
-  name                 = "${var.subnet_name}"
+  name                 = "${k8s_subnet_name}"
   resource_group_name  = "${azurerm_resource_group.k8s-rg.name}"
   address_prefix       = "192.168.100.0/25"
   virtual_network_name = "${azurerm_virtual_network.k8s-vnet.name}"
   service_endpoints    = ["Microsoft.Storage", "Microsoft.Sql"]
 }
 
-# Create vnet subnet for kubernetes
+# Create vnet subnet for Windows servers
 resource "azurerm_subnet" "vm-subnet" {
-  name                 = "${var.subnet_name}"
+  name                 = "${vm_subnet_namee}"
   resource_group_name  = "${azurerm_resource_group.k8s-rg.name}"
   address_prefix       = "192.168.100.128/26"
   virtual_network_name = "${azurerm_virtual_network.k8s-vnet.name}"
