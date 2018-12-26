@@ -40,3 +40,7 @@ variable resource_group_name {
 variable location {
     default = "West Europe"
 }
+
+variable log_analytics_workspace_name {
+    default = "k8snenadtest"
+}

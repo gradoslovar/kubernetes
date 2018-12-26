@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "k8s-rg" {
 
 # Create Log Analytics Workspace
 resource "azurerm_log_analytics_workspace" "k8s-log" {
-  name                = "watchk8s"
+  name                = "${var.log_analytics_workspace_name}"
   location            = "${azurerm_resource_group.k8s-rg.location}"
   resource_group_name = "${azurerm_resource_group.k8s-rg.name}"
   sku                 = "Free"
