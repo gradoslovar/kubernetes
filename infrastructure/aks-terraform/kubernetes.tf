@@ -54,7 +54,7 @@ resource "azurerm_subnet" "k8s-subnet" {
 
 # Create vnet subnet for Windows servers
 resource "azurerm_subnet" "vm-subnet" {
-  name                 = "${var.vm_subnet_namee}"
+  name                 = "${var.vm_subnet_name}"
   resource_group_name  = "${azurerm_resource_group.k8s-rg.name}"
   address_prefix       = "192.168.100.128/26"
   virtual_network_name = "${azurerm_virtual_network.k8s-vnet.name}"
