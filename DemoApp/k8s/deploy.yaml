@@ -21,7 +21,7 @@ spec:
         ports:
         - containerPort: 80
           protocol: TCP
-      imagePUllSecrets:
+      imagePullSecrets:
       - ascreg
 ---
 apiVersion: v1
