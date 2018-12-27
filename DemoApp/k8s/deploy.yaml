@@ -22,7 +22,7 @@ spec:
         - containerPort: 80
           protocol: TCP
       imagePullSecrets:
-      - ascreg
+      - name: ascreg
 ---
 apiVersion: v1
 kind: Service
