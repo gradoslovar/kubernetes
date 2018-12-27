@@ -16,7 +16,7 @@ spec:
         name: helloworld
     spec:
       containers:
-      - name: service-b
+      - name: helloworld
         image: nenad.azurecr.io/helloworld
         ports:
         - containerPort: 80
