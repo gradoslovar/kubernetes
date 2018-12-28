@@ -6,22 +6,22 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: helloworld
+      app: helloworld
   strategy:
     type: RollingUpdate
-  replicas: 1
   template:
     metadata:
       labels:
-        name: helloworld
+        app: helloworld
     spec:
       containers:
       - name: helloworld
-        image: nenad.azurecr.io/helloworld:#{Version}#
+        image: nenad.azurecr.io/helloworld
         ports:
         - containerPort: 80
-          protocol: TCP
-      - name: ascreg
+          name: helloworld
+      imagePullSecrets:
+      - name: acr-auth
 ---
 apiVersion: v1
 kind: Service
