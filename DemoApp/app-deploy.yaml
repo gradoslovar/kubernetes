@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: nenad.azurecr.io/helloworld
+        image: nenad.azurecr.io/helloworld:#{Version}#
         ports:
         - containerPort: 80
           name: helloworld
