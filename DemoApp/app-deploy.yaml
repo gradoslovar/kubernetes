@@ -3,7 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloworld
-  c
+  labels:
+    app: helloworld
 spec:
   selector:
     matchLabels:
