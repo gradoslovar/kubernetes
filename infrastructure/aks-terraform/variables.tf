@@ -13,10 +13,6 @@ variable public_ssh_key_path {
     default = "~/.ssh/key.pub"
 }
 
-variable dns_prefix {
-    default = "k8stest"
-}
-
 variable cluster_name {
     default = "k8stest"
 }

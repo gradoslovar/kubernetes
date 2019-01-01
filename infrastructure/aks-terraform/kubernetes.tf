@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     name                = "${var.cluster_name}"
     location            = "${azurerm_resource_group.k8s-rg.location}"
     resource_group_name = "${azurerm_resource_group.k8s-rg.name}"
-    dns_prefix          = "${var.dns_prefix}"
+    dns_prefix          = "${var.cluster_name}"
     kubernetes_version  = "${var.kubernetes_version}"
 
     # linux_profile {
